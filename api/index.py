@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder='../static')
 CORS(app)  # разрешаем запросы с любого домена
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN")  # токен твоего бота
+BOT_TOKEN = os.environ.get("8808032455:AAF_nZ2wTgk3il-iGUYrG89Wo2FggCjMstI")  # токен твоего бота
 
 # Эндпоинт для получения аватарки
 @app.route('/api/photo', methods=['GET'])
