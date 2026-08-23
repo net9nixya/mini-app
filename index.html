@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: var(--tg-theme-bg-color);
+            color: var(--tg-theme-text-color);
+        }
+        button {
+            font-size: 24px;
+            padding: 15px 30px;
+            background: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>👋 Привет, <span id="name">игрок</span>!</h1>
+    <p>Твой ID: <span id="user_id">-</span></p>
+    <button onclick="clickHandler()">Кликни меня!</button>
+    <p>Кликов: <span id="count">0</span></p>
+    
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.ready();
+        
+        const user = tg.initDataUnsafe?.user;
+        document.getElementById('name').textContent = user?.first_name || 'игрок';
+        document.getElementById('user_id').textContent = user?.id || '-';
+        
+        let count = 0;
+        function clickHandler() {
+            count++;
+            document.getElementById('count').textContent = count;
+            tg.sendData(JSON.stringify({ action: 'click', count: count }));
+        }
+    </script>
+</body>
+</html>
