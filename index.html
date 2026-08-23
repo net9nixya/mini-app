@@ -35,7 +35,6 @@
         
         const user = tg.initDataUnsafe?.user;
         document.getElementById('name').textContent = user?.first_name || 'игрок';
-        document.getElementById('user_id').textContent = user?.id || '-';
         
         let count = 0;
         function clickHandler() {
