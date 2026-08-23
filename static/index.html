@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
-    <title>Pulse</title>
-    <!-- Font Awesome 6 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Pulse</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -33,7 +28,7 @@
             width: 100%;
             background: var(--tg-theme-secondary-bg-color, #14141f);
             border-radius: 32px;
-            padding: 40px 28px 36px;
+            padding: 32px 24px 28px;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.03);
             text-align: center;
             transition: background 0.3s ease;
@@ -60,35 +55,28 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ===== АВАТАР ===== */
         .avatar-wrapper {
             position: relative;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
             margin: 0 auto;
             background: linear-gradient(135deg, #2d9cdb, #1a6b9e);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 600;
             color: #fff;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(45, 156, 219, 0.25);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
             border: 2px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .avatar:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 40px rgba(45, 156, 219, 0.35);
         }
 
         .avatar img {
@@ -99,11 +87,11 @@
 
         .avatar-badge {
             position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 28px;
-            height: 28px;
-            background: var(--tg-theme-button-color, #2d9cdb);
+            bottom: 0px;
+            right: 0px;
+            width: 26px;
+            height: 26px;
+            background: #2d9cdb;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -114,9 +102,8 @@
             border: 2px solid var(--tg-theme-secondary-bg-color, #14141f);
         }
 
-        /* ===== ИМЯ ===== */
         .greeting {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             margin-bottom: 4px;
             letter-spacing: -0.5px;
@@ -127,65 +114,68 @@
         }
 
         .greeting-sub {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--tg-theme-hint-color, rgba(255, 255, 255, 0.3));
-            margin-bottom: 28px;
-            letter-spacing: 0.3px;
+            margin-bottom: 20px;
         }
 
-        /* ===== СЧЁТЧИК ===== */
-        .counter-wrap {
+        /* ===== СТАТИСТИКА ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            padding: 28px 16px 24px;
-            margin-bottom: 28px;
+            border-radius: 16px;
+            padding: 14px 8px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            position: relative;
-            backdrop-filter: blur(8px);
             transition: border-color 0.3s ease;
         }
 
-        .counter-wrap:focus-within {
-            border-color: rgba(45, 156, 219, 0.15);
-        }
-
-        .counter-number {
-            font-size: 76px;
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -4px;
-            background: linear-gradient(135deg, #ffffff 50%, rgba(255, 255, 255, 0.3));
+        .stat-card .num {
+            font-size: 22px;
+            font-weight: 700;
+            display: block;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 60%, rgba(255, 255, 255, 0.4));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            transition: transform 0.2s ease;
         }
 
-        .counter-number.pop {
-            animation: pop 0.15s ease;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
-
-        .counter-label {
-            font-size: 12px;
+        .stat-card .label {
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            opacity: 0.3;
-            margin-top: 8px;
+            letter-spacing: 1.5px;
+            opacity: 0.35;
+            margin-top: 4px;
             font-weight: 600;
-            color: var(--tg-theme-hint-color, #888);
+        }
+
+        /* ===== ДОП СТАТИСТИКА ===== */
+        .stats-extra {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stats-extra .stat-card {
+            padding: 10px 8px;
+        }
+
+        .stats-extra .stat-card .num {
+            font-size: 18px;
         }
 
         /* ===== КНОПКА ===== */
         .btn {
             width: 100%;
-            padding: 18px 24px;
-            font-size: 17px;
+            padding: 16px 24px;
+            font-size: 16px;
             font-weight: 600;
             border: none;
             border-radius: 18px;
@@ -202,21 +192,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-        }
-
-        .btn i {
-            font-size: 18px;
-            transition: transform 0.2s ease;
+            gap: 10px;
         }
 
         .btn:active {
             transform: scale(0.96);
-            box-shadow: 0 2px 12px rgba(45, 156, 219, 0.15);
-        }
-
-        .btn:active i {
-            transform: scale(0.9);
         }
 
         .btn::after {
@@ -227,51 +207,18 @@
             opacity: 0;
             transition: opacity 0.2s;
         }
-
-        .btn:active::after {
-            opacity: 1;
-        }
+        .btn:active::after { opacity: 1; }
 
         .btn.loading {
             opacity: 0.6;
             pointer-events: none;
         }
 
-        .btn.loading i {
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ===== НИЖНИЙ БАР (статистика) ===== */
-        .bottom-stats {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .bottom-stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: var(--tg-theme-hint-color, rgba(255, 255, 255, 0.3));
-        }
-
-        .bottom-stat i {
+        /* ===== ЗАГРУЗКА ===== */
+        .loading-text {
+            opacity: 0.4;
             font-size: 14px;
-            color: var(--tg-theme-link-color, #2d9cdb);
-            opacity: 0.6;
-        }
-
-        .bottom-stat span {
-            font-weight: 500;
+            padding: 20px 0;
         }
 
         /* ===== СВЕТЛАЯ ТЕМА ===== */
@@ -285,98 +232,46 @@
                 box-shadow: 0 12px 60px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.02);
                 border-color: rgba(0, 0, 0, 0.03);
             }
-            .card::before {
-                background: radial-gradient(ellipse at 50% 0%, rgba(45, 156, 219, 0.02), transparent 70%);
-            }
-            .counter-wrap {
-                background: rgba(0, 0, 0, 0.02);
-                border-color: rgba(0, 0, 0, 0.04);
-            }
-            .counter-number {
-                background: linear-gradient(135deg, #1a1a2e 50%, #555);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
             .greeting {
                 background: linear-gradient(135deg, #1a1a2e 70%, #666);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
             }
-            .bottom-stats {
-                border-top-color: rgba(0, 0, 0, 0.04);
+            .stat-card .num {
+                background: linear-gradient(135deg, #1a1a2e 60%, #555);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
             }
             .avatar-badge {
                 border-color: #ffffff;
             }
+            .stat-card {
+                background: rgba(0, 0, 0, 0.02);
+                border-color: rgba(0, 0, 0, 0.04);
+            }
         }
 
-        /* ===== АДАПТИВ ===== */
         @media (max-width: 420px) {
-            .card {
-                padding: 32px 20px 28px;
-                border-radius: 24px;
-            }
-            .avatar {
-                width: 80px;
-                height: 80px;
-                font-size: 34px;
-            }
-            .avatar-badge {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-            }
-            .greeting {
-                font-size: 22px;
-            }
-            .counter-number {
-                font-size: 60px;
-            }
-            .btn {
-                font-size: 15px;
-                padding: 16px 20px;
-            }
-            .bottom-stats {
-                gap: 16px;
-                font-size: 12px;
-            }
+            .card { padding: 24px 16px 20px; border-radius: 24px; }
+            .avatar { width: 72px; height: 72px; font-size: 30px; }
+            .avatar-badge { width: 22px; height: 22px; font-size: 10px; }
+            .greeting { font-size: 20px; }
+            .stat-card .num { font-size: 18px; }
+            .stats-extra .stat-card .num { font-size: 16px; }
+            .btn { font-size: 15px; padding: 14px 20px; }
         }
 
         @media (max-width: 340px) {
-            .card {
-                padding: 24px 14px 20px;
-                border-radius: 20px;
-            }
-            .avatar {
-                width: 64px;
-                height: 64px;
-                font-size: 28px;
-            }
-            .avatar-badge {
-                width: 20px;
-                height: 20px;
-                font-size: 8px;
-                bottom: 0px;
-                right: 0px;
-            }
-            .greeting {
-                font-size: 18px;
-            }
-            .counter-number {
-                font-size: 48px;
-            }
-            .btn {
-                font-size: 14px;
-                padding: 14px 16px;
-                border-radius: 14px;
-            }
-            .bottom-stats {
-                flex-direction: column;
-                gap: 6px;
-                align-items: center;
-            }
+            .card { padding: 16px 12px 16px; border-radius: 20px; }
+            .avatar { width: 60px; height: 60px; font-size: 24px; }
+            .avatar-badge { width: 18px; height: 18px; font-size: 8px; bottom: -2px; right: -2px; }
+            .greeting { font-size: 17px; }
+            .stat-card .num { font-size: 15px; }
+            .stats-extra .stat-card .num { font-size: 13px; }
+            .stat-card { padding: 10px 4px; }
+            .btn { font-size: 13px; padding: 12px 16px; border-radius: 14px; }
         }
     </style>
 </head>
@@ -387,10 +282,10 @@
     <!-- АВАТАР -->
     <div class="avatar-wrapper">
         <div class="avatar" id="avatar">
-            <i class="fas fa-user" style="font-size: 40px; opacity: 0.6;"></i>
+            <i class="fas fa-user" style="font-size: 36px; opacity: 0.6;"></i>
         </div>
         <div class="avatar-badge">
-            <i class="fas fa-check-circle" style="font-size: 12px;"></i>
+            <i class="fas fa-check-circle" style="font-size: 11px;"></i>
         </div>
     </div>
 
@@ -398,31 +293,16 @@
     <div class="greeting">Привет, <span id="name">игрок</span></div>
     <div class="greeting-sub" id="user-status">● активен</div>
 
-    <!-- СЧЁТЧИК -->
-    <div class="counter-wrap">
-        <div class="counter-number" id="countDisplay">0</div>
-        <div class="counter-label">
-            <i class="fas fa-hand-pointer" style="margin-right: 6px;"></i> кликов
-        </div>
+    <!-- СТАТИСТИКА (профиль) -->
+    <div id="profile-content">
+        <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Загрузка профиля...</div>
     </div>
 
-    <!-- КНОПКА -->
+    <!-- КНОПКА (всё ещё работает) -->
     <button class="btn" id="mainBtn">
         <i class="fas fa-bolt"></i>
         <span>нажми если пидор</span>
     </button>
-
-    <!-- НИЖНИЙ БАР -->
-    <div class="bottom-stats">
-        <div class="bottom-stat">
-            <i class="fas fa-user-check"></i>
-            <span>ID: <span id="userIdDisplay">—</span></span>
-        </div>
-        <div class="bottom-stat">
-            <i class="fas fa-clock"></i>
-            <span id="timeDisplay">00:00</span>
-        </div>
-    </div>
 
 </div>
 
@@ -435,10 +315,8 @@
         const user = tg.initDataUnsafe?.user || {};
         const nameEl = document.getElementById('name');
         const avatarEl = document.getElementById('avatar');
-        const countDisplay = document.getElementById('countDisplay');
         const mainBtn = document.getElementById('mainBtn');
-        const userIdDisplay = document.getElementById('userIdDisplay');
-        const timeDisplay = document.getElementById('timeDisplay');
+        const profileContent = document.getElementById('profile-content');
 
         // ---- Имя ----
         if (user.first_name) {
@@ -447,8 +325,6 @@
 
         // ---- Аватарка ----
         if (user.id) {
-            userIdDisplay.textContent = user.id;
-
             if (user.photo_url) {
                 const img = document.createElement("img");
                 img.src = user.photo_url;
@@ -456,31 +332,86 @@
                 avatarEl.innerHTML = "";
                 avatarEl.appendChild(img);
             } else {
-                // Если фото нет — показываем иконку
-                avatarEl.innerHTML = '<i class="fas fa-user" style="font-size: 40px; opacity: 0.6;"></i>';
+                avatarEl.innerHTML = '<i class="fas fa-user" style="font-size: 36px; opacity: 0.6;"></i>';
             }
         }
 
-        // ---- Время ----
-        function updateTime() {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            timeDisplay.textContent = h + ':' + m;
-        }
-        updateTime();
-        setInterval(updateTime, 30000);
+        // ---- Загрузка профиля с сервера ----
+        async function loadProfile(userId) {
+            try {
+                const response = await fetch(`/api/profile?user_id=${userId}`);
+                const data = await response.json();
 
-        // ---- Счётчик ----
+                if (data.success) {
+                    const total = data.wins + data.losses;
+                    const winrate = total > 0 ? Math.round((data.wins / total) * 100) : 0;
+
+                    profileContent.innerHTML = `
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="num">${data.elo}</span>
+                                <span class="label">ELO</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="num">${data.gold}</span>
+                                <span class="label">Голда</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="num">${data.vips ? '👑' : '—'}</span>
+                                <span class="label">VIP</span>
+                            </div>
+                        </div>
+                        <div class="stats-extra">
+                            <div class="stat-card">
+                                <span class="num">${data.wins}</span>
+                                <span class="label">Побед</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="num">${data.losses}</span>
+                                <span class="label">Поражений</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="num">${total}</span>
+                                <span class="label">Всего</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="num">${winrate}%</span>
+                                <span class="label">Винрейт</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    profileContent.innerHTML = `
+                        <div style="opacity:0.4; font-size:14px; padding:12px 0;">
+                            <i class="fas fa-exclamation-circle"></i> ${data.error || 'Не удалось загрузить профиль'}
+                        </div>
+                    `;
+                }
+            } catch (e) {
+                profileContent.innerHTML = `
+                    <div style="opacity:0.4; font-size:14px; padding:12px 0;">
+                        <i class="fas fa-exclamation-circle"></i> Ошибка загрузки
+                    </div>
+                `;
+                console.warn('Profile load error:', e);
+            }
+        }
+
+        // ---- Загружаем профиль, если есть user.id ----
+        if (user.id) {
+            loadProfile(user.id);
+        } else {
+            profileContent.innerHTML = `
+                <div style="opacity:0.4; font-size:14px; padding:12px 0;">
+                    <i class="fas fa-user-slash"></i> Нет данных пользователя
+                </div>
+            `;
+        }
+
+        // ---- Счётчик (кнопка) ----
         let count = 0;
-
-        function updateUI() {
-            countDisplay.textContent = count;
-            // Анимация поп
-            countDisplay.classList.remove('pop');
-            void countDisplay.offsetWidth;
-            countDisplay.classList.add('pop');
-        }
+        const countDisplay = document.createElement('span');
+        countDisplay.style.display = 'none';
 
         function sendToBot() {
             try {
@@ -494,7 +425,6 @@
 
         function handleClick() {
             count++;
-            updateUI();
             sendToBot();
             mainBtn.classList.add('loading');
             setTimeout(() => mainBtn.classList.remove('loading'), 150);
@@ -507,8 +437,6 @@
                 handleClick();
             }
         });
-
-        updateUI();
 
         // ---- Инициализация ----
         setTimeout(() => {
